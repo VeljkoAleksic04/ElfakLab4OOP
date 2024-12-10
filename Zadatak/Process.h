@@ -21,9 +21,10 @@ protected:
 
 public:
 	Process(int);
+	~Process();
 	int GetPassword() const;
 	int GetState() const;
-	void ReadProcess();
+	virtual void ReadProcess();
 	virtual void Start(const char* parameter) = 0;
 	virtual void Stop() = 0;
 	void UnconditionalStart();

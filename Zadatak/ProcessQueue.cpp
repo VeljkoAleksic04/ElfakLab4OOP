@@ -10,10 +10,6 @@ ProcessQueue::ProcessQueue(int maxElements) : _maxElements(maxElements), _active
 }
 
 ProcessQueue::~ProcessQueue() {
-	for (int i = 0; i < _maxElements; i++) {
-		delete _activeProcesses[i];
-		delete _pendingProcesses[i];
-	}
 	delete[] _activeProcesses;
 	delete[] _pendingProcesses;
 	_activeProcesses = nullptr;
@@ -96,7 +92,8 @@ void ProcessQueue::StopProcesses() {
 		i++;
 	}
 }
-ProcessQueue ProcessQueue::operator+(ProcessQueue& pQueue) {
+
+ProcessQueue ProcessQueue::operator+(const ProcessQueue& pQueue) {
 	ProcessQueue pq(_maxElements + pQueue._maxElements);
 	int processCntActive = _cntActive, processCntPending = _cntPending;
 
@@ -104,23 +101,19 @@ ProcessQueue ProcessQueue::operator+(ProcessQueue& pQueue) {
 	processCntPending += pQueue._cntPending;
 	for (int i = 0; i < _cntActive; i++) {
 		pq._activeProcesses[i] = _activeProcesses[i];
-		pq._cntActive++;
 	}
-	for (int i = _cntActive; i < processCntActive; i++) {
-		pq._activeProcesses[i] = pQueue._activeProcesses[i-_cntActive];
-		pq._cntActive++;
+	for (int i = 0; i < pQueue._cntActive; i++) {
+		pq._activeProcesses[i + _cntActive] = pQueue._activeProcesses[i];
 	}
-	pq._activeProcesses[pq._cntActive - 1] = nullptr;
+	pq._cntActive = processCntActive;
 
 	for (int i = 0; i < _cntPending; i++) {
 		pq._pendingProcesses[i] = _pendingProcesses[i];
-		pq._cntPending++;
 	}
 	for (int i = _cntPending; i < processCntPending; i++) {
 		pq._pendingProcesses[i] = pQueue._pendingProcesses[i-_cntPending];
-		pq._cntPending++;
 	}
-	pq._pendingProcesses[pq._cntActive - 1] = nullptr;
+	pq._cntPending = processCntPending;
 	return pq;
 }
 void ProcessQueue::PrintProcessQueue() {

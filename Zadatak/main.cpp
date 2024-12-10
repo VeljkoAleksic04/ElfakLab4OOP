@@ -5,7 +5,7 @@
 #include "ProcessQueue.h"
 using namespace std;
 
-int main() {
+void main() {
 	Process* pup1 = new PublicProcess(123, "name1");
 	Process* pup2 = new PublicProcess(987, "name2");
 	Process* pup3 = new	PublicProcess(654, "name3");
@@ -87,5 +87,17 @@ int main() {
 	cout << endl << "Process Queue 3: " << endl;
 	pq3.PrintProcessQueue();
 
-	return 0;
+	delete pup1;
+	delete pup2;
+	delete pup3;
+	delete pup4;
+	delete pup5;
+
+	delete prp1;
+	delete prp2;
+	delete prp3;
+	delete prp4;
+
+	delete pq1;
+	delete pq2;
 }
