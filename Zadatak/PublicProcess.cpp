@@ -1,5 +1,6 @@
 ﻿#include "PublicProcess.h"
 #include <string.h>
+#include <iostream>
 
 /*
 	Kod objekata ove klase parametar tip uvek ima vrednost 0. Prilikom startovanja procesa prosleđuje se kao parametar 
@@ -12,6 +13,10 @@ PublicProcess::PublicProcess(int password, const char* name) : Process(password)
     _creatorName = new char[50];
     strcpy(_creatorName, name);
     _type = 0;
+}
+void PublicProcess::ReadProcess() {
+    Process::ReadProcess();
+    std::cout << "\tCreator name: " << _creatorName << std::endl;
 }
 void PublicProcess::Start(const char* parameter) {
     _state = 1;

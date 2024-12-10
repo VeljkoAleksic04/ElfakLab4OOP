@@ -20,6 +20,7 @@ private:
     char* _creatorName;
 public:
     PublicProcess(int, const char*);
+    void ReadProcess();
     void Start(const char*);
     void Stop();
     void SetCreatorName(char* name) { strcpy(_creatorName, name); }

@@ -13,6 +13,7 @@ private:
     char* _code;
 public:
     PrivateProcess(int, const char*);
+    void ReadProcess();
     void Start(const char*);
     void Stop();
 };

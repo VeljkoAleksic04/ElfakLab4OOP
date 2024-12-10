@@ -29,7 +29,7 @@ public:
 	void RemoveState2();
 	void ActivateProcesses();
 	void StopProcesses();
-	ProcessQueue operator+(ProcessQueue&);
+	ProcessQueue operator+(const ProcessQueue&);
 	void PrintProcessQueue();
 };
 

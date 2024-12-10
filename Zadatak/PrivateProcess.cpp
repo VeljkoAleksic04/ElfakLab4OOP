@@ -11,6 +11,10 @@ PrivateProcess::PrivateProcess(int password, const char* code) : Process(passwor
 	_type = 1;
 	strcpy(_code, code);
 }
+void PrivateProcess::ReadProcess() {
+	Process::ReadProcess();
+	std::cout << "\tCode: " << _code << "\n";
+}
 void PrivateProcess::Start(const char* parameter) {
 	if (!strcmp(parameter, _code))
 		_state = 1;
